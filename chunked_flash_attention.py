@@ -1,7 +1,3 @@
-# Chunked Flash Attention in Keras 
-
-
-```python
 from keras import layers, ops
 
 
@@ -18,7 +14,7 @@ class Attention(layers.Layer):
         self.kv_chunk_size = kv_chunk_size
 
     @staticmethod
-    def _flash_attention(query, key, value, scale, q_chunk_size=1, kv_chunk_size=1): 
+    def _flash_attention(query, key, value, scale, q_chunk_size=1, kv_chunk_size=1):
         result = []
         if kv_chunk_size == 1:
             q_chunks = ops.split(query, q_chunk_size, axis=1)
@@ -85,7 +81,7 @@ class CrossAttention(layers.Layer):
         self.kv_chunk_size = kv_chunk_size
 
     @staticmethod
-    def _flash_attention(query, key, value, scale, q_chunk_size=1, kv_chunk_size=1): 
+    def _flash_attention(query, key, value, scale, q_chunk_size=1, kv_chunk_size=1):
         result = []
         if kv_chunk_size == 1:
             q_chunks = ops.split(query, q_chunk_size, axis=1)
@@ -146,27 +142,3 @@ class CrossAttention(layers.Layer):
         attn = ops.stack(v_out, axis=num_heads_axis)
         out = ops.reshape(attn, out_shape)
         return self.out_proj(out)
-```
-# Projects already applied
-- [minSDTF](https://github.com/cpuimage/minSDTF) 
-- [minSDXLTF](https://github.com/cpuimage/minSDXLTF) 
-
-## Acknowledgements
-- flash-attention - https://github.com/Dao-AILab/flash-attention
-
-## Reach me on
-
-   - [![Telegram Badge](https://img.shields.io/badge/cpuimage-blue?style=flat&logo=telegram&logoColor=white)](https://t.me/cpuimage)
-   - ![Wechat Badge](https://img.shields.io/badge/DbgMonks-7BB32E?style=flat&logo=wechat&logoColor=white)
-   - ![QQ Badge](https://img.shields.io/badge/200759103-blue?style=flat&logo=tencent-qq&logoColor=white) 
-   - [![mail Badge](https://img.shields.io/badge/gaozhihan@vip.qq.com-D14836?logo=gmail&logoColor=white)](mailto:gaozhihan@vip.qq.com)
-
-## Donating
-
-If this project useful for you, please consider buying me a cup of coffee or sponsoring me!
-
-<a href="https://paypal.me/cpuimage/USD10" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/black_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=cpuimage/chunked-flash-attention-keras&type=Date)](https://www.star-history.com/#cpuimage/chunked-flash-attention-keras&Date)
